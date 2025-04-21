@@ -28,14 +28,6 @@ struct HomeScreenFactory {
     }
 }
 
-class ViewModel: ObservableObject {
-    @Published var types: [Int] = []
-    
-    func onSuccessGettingTypes(response: FrameworkUIState) {
-        types = response.cells
-    }
-}
-
 struct ProvidersCellFactory {
     @ViewBuilder
     func makeCell(forType type: Int) -> some View {

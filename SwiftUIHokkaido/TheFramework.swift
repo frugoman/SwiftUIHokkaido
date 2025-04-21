@@ -17,6 +17,14 @@ struct TheFramework<Cell: View>: View {
     }
 }
 
+class ViewModel: ObservableObject {
+    @Published var types: [Int] = []
+    
+    func onSuccessGettingTypes(response: FrameworkUIState) {
+        types = response.cells
+    }
+}
+
 struct FrameworkUIState {
     let cells: [Int]
 }
