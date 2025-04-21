@@ -1,24 +1,22 @@
-//
-//  ContentView.swift
-//  SwiftUIHokkaido
-//
-//  Created by Nicolas Frugoni on 17/04/2025.
-//
-
 import SwiftUI
 
-struct ContentView: View {
+struct TheFramework<Cell: View>: View {
+    @ObservedObject var viewModel: ViewModel
+    let getCell: (Int) -> Cell
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ScrollView {
+            LazyVStack(spacing: 0) {
+                let types = viewModel.types
+                ForEach(0..<types.count, id: \.self) { idx in
+                    getCell(types[idx])
+                        .padding(.vertical)
+                }
+            }
         }
-        .padding()
     }
 }
 
-#Preview {
-    ContentView()
+struct FrameworkUIState {
+    let cells: [Int]
 }
